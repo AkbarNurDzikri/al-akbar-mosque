@@ -1,0 +1,32 @@
+<!-- Modal -->
+<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="modalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/anggota" method="POST">
+            <input type="hidden" name="id" id="id">
+
+            <label for="nama" class="form-label">Nama</label>
+            <input type="text" class="form-control mb-3" id="nama" name="nama" required>
+            
+            <label for="alamat" class="form-label">Alamat</label>
+            <textarea name="alamat" id="alamat" class="form-control mb-3"></textarea>
+
+            <label for="nohp" class="form-label">No HP</label>
+            <input type="text" class="form-control mb-3" id="nohp" name="nohp" required>
+
+            <label for="jabatan" class="form-label">Jabatan</label>
+            <input type="text" class="form-control mb-3" id="jabatan" name="jabatan" required>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" id="btnUpdate">Save</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </form>
+      </div>
+  </div>
+</div>
