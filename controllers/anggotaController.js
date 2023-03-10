@@ -37,8 +37,7 @@ const editAnggota = async (req, res) => {
 
     const filter = { _id: id };
     const update = { nama, alamat, nohp, jabatan };
-    await Anggota.findOneAndReplace(filter, update);
-
+    await Anggota.findOneAndUpdate(filter, update);
     req.flash('alertMsg', 'Berhasil merubah data anggota');
     req.flash('alertStatus', 'success');
     res.redirect('/anggota');
@@ -53,7 +52,6 @@ const deleteAnggota = async (req, res) => {
   try {
     const { id } = req.body;
     await Anggota.findOneAndDelete({ _id: id });
-    
     req.flash('alertMsg', 'Berhasil menghapus data anggota');
     req.flash('alertStatus', 'success');
     res.redirect('/anggota');

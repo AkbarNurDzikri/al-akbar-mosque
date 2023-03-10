@@ -10,7 +10,7 @@
     <div class="container mt-5">
       <div class="card">
         <div class="card-header bg-success text-white">
-          <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#modal" id="modalTrigger"><i class="bi bi-person-plus"></i></button>
+          <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#modalFormAnggota" id="modalTrigger"><i class="bi bi-person-plus"></i></button>
         </div>
         <div class="card-body">
           <% if (alert.msg != '') { %>
@@ -31,6 +31,14 @@
               </tr>
             </thead>
             <tbody>
+              <% if (anggota.length < 1) { %>
+                <tr>
+                  <td colspan="6">
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">No Data</div>
+                  </td>
+                </tr>
+              <% } %>
+
               <% let i = 1; %>
               <% anggota.forEach(agt => { %>
                 <tr>
@@ -40,11 +48,8 @@
                   <td><%= agt.nohp %></td>
                   <td><%= agt.jabatan %></td>
                   <td>
-                    <a href="" class="btn btn-success btn-sm btnEdit" data-bs-toggle="modal" data-bs-target="#modal" data-id="<%= agt.id %>" data-nama="<%= agt.nama %>" data-alamat="<%= agt.alamat %>" data-nohp="<%= agt.nohp %>" data-jabatan="<%= agt.jabatan %>">Edit</a>
-                    <form action="/anggota?_method=DELETE" method="POST" class="d-inline">
-                      <input type="hidden" name="id" value="<%= agt.id %>">
-                      <button type="submit" class="btn btn-danger btn-sm btnHapus">Hapus</button>
-                    </form>
+                    <button type="button" class="btn btn-success btn-sm btnEdit" data-bs-toggle="modal" data-bs-target="#modalFormAnggota" data-id="<%= agt.id %>" data-nama="<%= agt.nama %>" data-alamat="<%= agt.alamat %>" data-nohp="<%= agt.nohp %>" data-jabatan="<%= agt.jabatan %>"><i class="bi bi-pencil-square"></i></button>
+                    <button type="button" class="btn btn-danger btn-sm btnHapus" data-bs-toggle="modal" data-bs-target="#modalKonfirmDelete" data-id="<%= agt.id %>" data-nama="<%= agt.nama %>"><i class="bi bi-trash3"></i></button>
                   </td>
                 </tr>
               <% }) %>
@@ -54,8 +59,9 @@
       </div>
     </div>
 
-    <%- include('modalAnggota.ejs') %>
+    <%- include('modalFormAnggota.ejs') %>
+    <%- include('modalKonfirmDelete.ejs') %>
     <script src="/stylesheets/bootstrap-5.3.0-alpha1-dist/js/bootstrap.min.js"></script>
-    <script src="/javascripts/myScript.js"></script>
+    <script src="/javascripts/anggota.js"></script>
   </body>
 </html>
