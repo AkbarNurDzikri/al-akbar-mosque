@@ -18,9 +18,19 @@ const viewAnggota = async (req, res) => {
 };
 
 const addAnggota = async (req, res) => {
+  const validExt = ['jpg', 'jpeg', 'png'];
+  const extReq = req.file.mimetype.split('/')[1];
+  if(validExt.includes(extReq) === false) {
+    req.flash('alertMsg', 'File yg Anda upload tidak diizinkan !');
+    req.flash('alertStatus', 'warning');
+    res.redirect('/anggota');
+    return false;
+  }
+
   try {
     const { nama, alamat, whatsapp, email, jabatan } = req.body;
-    await Anggota.create({nama, alamat, kontak: {whatsapp, email}, jabatan});
+    
+    await Anggota.create({nama, alamat, kontak: {whatsapp, email}, jabatan, foto: req.file.filename});
     req.flash('alertMsg', 'Berhasil menambahkan anggota');
     req.flash('alertStatus', 'success');
     res.redirect('/anggota');
@@ -29,7 +39,6 @@ const addAnggota = async (req, res) => {
     req.flash('alertStatus', 'danger');
     res.redirect('/anggota');
   }
-  // console.log(req.body);
 };
 
 const editAnggota = async (req, res) => {

@@ -7,7 +7,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="/anggota" method="POST" id="formCreateUpdate">
+          <form action="/anggota" method="POST" enctype="multipart/form-data" id="formCreateUpdate">
             <input type="hidden" name="id" id="id">
 
             <label for="nama" class="form-label">Nama</label>
@@ -24,6 +24,9 @@
 
             <label for="jabatan" class="form-label">Jabatan</label>
             <input type="text" class="form-control mb-3" id="jabatan" name="jabatan" required>
+
+            <label for="foto" class="form-label">Foto</label>
+            <input type="file" class="form-control mb-3" id="foto" name="foto" required>
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary" id="btnUpdate">Save</button>
