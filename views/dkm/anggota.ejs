@@ -26,7 +26,7 @@
                 <th>No</th>
                 <th>Nama</th>
                 <th>Alamat</th>
-                <th>No HP</th>
+                <th>Kontak</th>
                 <th>Jabatan</th>
                 <th>Opsi</th>
               </tr>
@@ -46,10 +46,10 @@
                   <td><%= i++ %></td>
                   <td><%= agt.nama %></td>
                   <td><%= agt.alamat %></td>
-                  <td><%= agt.nohp %></td>
+                  <td>[ Whatsapp: <%= agt.kontak.whatsapp %> ], [ Email: <%= agt.kontak.email %> ]</td>
                   <td><%= agt.jabatan %></td>
                   <td>
-                    <button type="button" class="btn btn-success btn-sm btnEdit" data-bs-toggle="modal" data-bs-target="#modalFormAnggota" data-id="<%= agt.id %>" data-nama="<%= agt.nama %>" data-alamat="<%= agt.alamat %>" data-nohp="<%= agt.nohp %>" data-jabatan="<%= agt.jabatan %>"><i class="bi bi-pencil-square"></i></button>
+                    <button type="button" class="btn btn-success btn-sm btnEdit" data-bs-toggle="modal" data-bs-target="#modalFormAnggota" data-id="<%= agt.id %>" data-nama="<%= agt.nama %>" data-alamat="<%= agt.alamat %>" data-whatsapp="<%= agt.kontak.whatsapp %>" data-email="<%= agt.kontak.email %>" data-jabatan="<%= agt.jabatan %>"><i class="bi bi-pencil-square"></i></button>
                     <button type="button" class="btn btn-danger btn-sm btnHapus" data-bs-toggle="modal" data-bs-target="#modalKonfirmDelete" data-id="<%= agt.id %>" data-nama="<%= agt.nama %>"><i class="bi bi-trash3"></i></button>
                   </td>
                 </tr>

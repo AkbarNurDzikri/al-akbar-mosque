@@ -9,9 +9,15 @@ const anggotaScheme = new mongoose.Schema({
     type: String,
     required: true,
   },
-  nohp: {
-    type: String,
-    required: true,
+  kontak: {
+    whatsapp: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: false,
+    }
   },
   jabatan: {
     type: String,

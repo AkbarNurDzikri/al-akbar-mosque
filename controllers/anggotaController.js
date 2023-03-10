@@ -19,8 +19,8 @@ const viewAnggota = async (req, res) => {
 
 const addAnggota = async (req, res) => {
   try {
-    const { nama, alamat, nohp, jabatan } = req.body;
-    await Anggota.create({nama, alamat, nohp, jabatan});
+    const { nama, alamat, whatsapp, email, jabatan } = req.body;
+    await Anggota.create({nama, alamat, kontak: {whatsapp, email}, jabatan});
     req.flash('alertMsg', 'Berhasil menambahkan anggota');
     req.flash('alertStatus', 'success');
     res.redirect('/anggota');
@@ -29,14 +29,15 @@ const addAnggota = async (req, res) => {
     req.flash('alertStatus', 'danger');
     res.redirect('/anggota');
   }
+  // console.log(req.body);
 };
 
 const editAnggota = async (req, res) => {
   try {
-    const { id, nama, alamat, nohp, jabatan } = req.body;
+    const { id, nama, alamat, whatsapp, email, jabatan } = req.body;
 
     const filter = { _id: id };
-    const update = { nama, alamat, nohp, jabatan };
+    const update = { nama, alamat, kontak: {whatsapp, email}, jabatan };
     await Anggota.findOneAndUpdate(filter, update);
     req.flash('alertMsg', 'Berhasil merubah data anggota');
     req.flash('alertStatus', 'success');

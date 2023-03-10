@@ -5,7 +5,8 @@ const btnHapus = document.getElementsByClassName('btnHapus');
 const inputId = document.getElementById('id');
 const inputNama = document.getElementById('nama');
 const inputAlamat = document.getElementById('alamat');
-const inputNohp = document.getElementById('nohp');
+const inputWhatsapp = document.getElementById('whatsapp');
+const inputEmail = document.getElementById('email');
 const inputJabatan = document.getElementById('jabatan');
 const formCreateUpdate = document.getElementById('formCreateUpdate');
 const btnUpdate = document.getElementById('btnUpdate');
@@ -16,7 +17,8 @@ modalTrigger.addEventListener('click', () => {
   btnUpdate.innerHTML = 'Save';
   inputNama.value = '';
   inputAlamat.value = '';
-  inputNohp.value = '';
+  inputWhatsapp.value = '';
+  inputEmail.value = '';
   inputJabatan.value = '';
 });
 
@@ -28,7 +30,8 @@ for(let i = 0; i < btnEdit.length; i++) {
     inputId.value = btnEdit[i].getAttribute('data-id');
     inputNama.value = btnEdit[i].getAttribute('data-nama');
     inputAlamat.value = btnEdit[i].getAttribute('data-alamat');
-    inputNohp.value = btnEdit[i].getAttribute('data-nohp');
+    inputWhatsapp.value = btnEdit[i].getAttribute('data-whatsapp');
+    inputEmail.value = btnEdit[i].getAttribute('data-email');
     inputJabatan.value = btnEdit[i].getAttribute('data-jabatan');
   });
 };
