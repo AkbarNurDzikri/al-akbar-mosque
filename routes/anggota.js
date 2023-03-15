@@ -16,9 +16,10 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 // endpoint anggota
-router.get('/', anggotaController.viewAnggota);
+router.get('/getAll', anggotaController.getAnggota); // get
+router.get('/', anggotaController.viewAnggota); // get
 router.post('/', upload.single('foto'), anggotaController.addAnggota);
-router.put('/', anggotaController.editAnggota);
+router.put('/', upload.single('foto'), anggotaController.editAnggota);
 router.delete('/', anggotaController.deleteAnggota);
 
 module.exports = router;

@@ -1,5 +1,10 @@
 const Anggota = require('../models/Anggota');
 
+const getAnggota = async(req, res) => {
+  const result =  await Anggota.find();
+  res.send(result)
+};
+
 const viewAnggota = async (req, res) => {
   try {
     const anggota = await Anggota.find();
@@ -46,7 +51,7 @@ const editAnggota = async (req, res) => {
     const { id, nama, alamat, whatsapp, email, jabatan } = req.body;
 
     const filter = { _id: id };
-    const update = { nama, alamat, kontak: {whatsapp, email}, jabatan };
+    const update = { nama, alamat, kontak: {whatsapp, email}, jabatan, foto: req.file.filename };
     await Anggota.findOneAndUpdate(filter, update);
     req.flash('alertMsg', 'Berhasil merubah data anggota');
     req.flash('alertStatus', 'success');
@@ -72,4 +77,4 @@ const deleteAnggota = async (req, res) => {
   }
 };
 
-module.exports = { viewAnggota, addAnggota, editAnggota, deleteAnggota };
+module.exports = { viewAnggota, addAnggota, editAnggota, deleteAnggota, getAnggota };
