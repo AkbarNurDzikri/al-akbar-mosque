@@ -1,9 +1,5 @@
 const Anggota = require('../models/Anggota');
-
-const getAnggota = async(req, res) => {
-  const result =  await Anggota.find();
-  res.send(result)
-};
+const fs = require('fs');
 
 const viewAnggota = async (req, res) => {
   try {
@@ -48,10 +44,11 @@ const addAnggota = async (req, res) => {
 
 const editAnggota = async (req, res) => {
   try {
-    const { id, nama, alamat, whatsapp, email, jabatan } = req.body;
+    const { id, nama, alamat, whatsapp, email, jabatan, foto } = req.body;
 
     const filter = { _id: id };
-    const update = { nama, alamat, kontak: {whatsapp, email}, jabatan, foto: req.file.filename };
+    const gambar = !foto ? req.file.filename : foto;
+    const update = { nama, alamat, kontak: {whatsapp, email}, jabatan, foto: gambar };
     await Anggota.findOneAndUpdate(filter, update);
     req.flash('alertMsg', 'Berhasil merubah data anggota');
     req.flash('alertStatus', 'success');
@@ -66,10 +63,20 @@ const editAnggota = async (req, res) => {
 const deleteAnggota = async (req, res) => {
   try {
     const { id } = req.body;
-    await Anggota.findOneAndDelete({ _id: id });
-    req.flash('alertMsg', 'Berhasil menghapus data anggota');
-    req.flash('alertStatus', 'success');
-    res.redirect('/anggota');
+    const target = await Anggota.findOne({ _id: id });
+
+    fs.unlink('./public/images/uploads/' + target.foto, async (err) => {
+      if(err) {
+        req.flash('alertMsg', `Gagal menghapus file ! [ Kode kesalahan : ${err} ]`);
+        req.flash('alertStatus', 'danger');
+        res.redirect('/anggota');
+      } else {
+        await Anggota.deleteOne(target);
+        req.flash('alertMsg', 'Berhasil menghapus data dan file anggota !');
+        req.flash('alertStatus', 'success');
+        res.redirect('/anggota');
+      }
+    });
   } catch(err) {
     req.flash('alertMsg', `${err.message}`);
     req.flash('alertStatus', 'danger');
@@ -77,4 +84,4 @@ const deleteAnggota = async (req, res) => {
   }
 };
 
-module.exports = { viewAnggota, addAnggota, editAnggota, deleteAnggota, getAnggota };
+module.exports = { viewAnggota, addAnggota, editAnggota, deleteAnggota };
