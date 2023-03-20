@@ -1,3 +1,9 @@
+$(document).ready( function () {
+  $('#myTable').DataTable({
+    fixedHeader: true,
+  });
+});
+
 const modalTrigger = document.getElementById('modalTrigger');
 const labelModal = document.getElementById('modalLabel');
 const btnEdit = document.getElementsByClassName('btnEdit');

@@ -13,7 +13,20 @@ const storage = multer.diskStorage({
   }
 })
 
-const upload = multer({ storage: storage })
+// not used for validate extensionbecause there are already HTML5 features (accept="image/png, ...")
+const checkExistOrNot = (req, file, cb) => {
+  // jika ada file, simpan filenya ke dalam direktori. Jika tidak ada, tidak perlu menyimpan ulang file
+  if(file) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+}
+
+const upload = multer({
+  storage: storage,
+  fileFilter: checkExistOrNot,
+})
 
 // endpoint anggota
 router.get('/', anggotaController.viewAnggota);

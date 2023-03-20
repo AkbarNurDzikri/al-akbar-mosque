@@ -54,7 +54,7 @@
                   <td>[ Whatsapp: <%= agt.kontak.whatsapp %> ], [ Email: <%= agt.kontak.email %> ]</td>
                   <td><%= agt.jabatan %></td>
                   <td>
-                    <img src="/images/uploads/<%= agt.foto %>" class="w-50" alt="foto-anggota">
+                    <img src="/images/uploads/<%= agt.foto %>" class="w-25" alt="foto-anggota">
                   </td>
                   <td>
                     <a href="#" class="badge rounded-pill text-bg-success btnEdit mb-1" data-bs-toggle="modal" data-bs-target="#modalFormAnggota" data-id="<%= agt.id %>" data-nama="<%= agt.nama %>" data-alamat="<%= agt.alamat %>" data-whatsapp="<%= agt.kontak.whatsapp %>" data-email="<%= agt.kontak.email %>" data-jabatan="<%= agt.jabatan %>" data-foto="<%= agt.foto %>"><i class="bi bi-pencil-square"></i></a>
@@ -76,12 +76,5 @@
     <script src="/vendor/datatables/FixedHeader-3.3.2/js/dataTables.fixedHeader.min.js"></script>
     <script src="/stylesheets/bootstrap-5.3.0-alpha1-dist/js/bootstrap.min.js"></script>
     <script src="/javascripts/anggota.js"></script>
-    <script>
-      $(document).ready( function () {
-        $('#myTable').DataTable({
-          fixedHeader: true,
-        });
-      });
-    </script>
   </body>
 </html>
