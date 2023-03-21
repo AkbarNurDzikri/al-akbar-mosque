@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
   }
 })
 
-// not used for validate extensionbecause there are already HTML5 features (accept="image/png, ...")
+// not used for validate extension because there are already HTML5 features (accept="image/png, ...")
 const checkExistOrNot = (req, file, cb) => {
   // jika ada file, simpan filenya ke dalam direktori. Jika tidak ada, tidak perlu menyimpan ulang file
   if(file) {
