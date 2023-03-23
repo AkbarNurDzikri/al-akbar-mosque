@@ -8,7 +8,7 @@ const viewAnggota = async (req, res) => {
     const alertStatus = req.flash('alertStatus');
     const alert = { msg: alertMsg, status: alertStatus };
 
-    res.render('./dkm/anggota', {
+    res.render('./dkm/anggota/tableAnggota', {
       anggota,
       alert,
       title: 'Anggota DKM'

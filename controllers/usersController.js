@@ -7,10 +7,10 @@ const viewUsers = async (req, res) => {
     const alertStatus = req.flash('alertStatus');
     const alert = { msg: alertMsg, status: alertStatus };
 
-    res.render('./users/table', {
+    res.render('./master/users/tableUsers', {
       users,
       alert,
-      title: 'Users'
+      title: 'Master Users'
     });
   } catch(err) {
     res.redirect('/users');
@@ -19,70 +19,56 @@ const viewUsers = async (req, res) => {
 
 const addUser = async (req, res) => {
   try {
-    const { nama, alamat, whatsapp, email, jabatan } = req.body;
-    await Anggota.create({nama, alamat, kontak: {whatsapp, email}, jabatan, foto: req.file.filename});
-    req.flash('alertMsg', 'Berhasil menambahkan anggota');
+    const { username, email, role, password, isActive } = req.body;
+    await Users.create({username, email, role, password, isActive});
+    req.flash('alertMsg', 'Berhasil menambahkan user');
     req.flash('alertStatus', 'success');
-    res.redirect('/anggota');
+    res.redirect('/users');
   } catch(err) {
     req.flash('alertMsg', `${err.message}`);
     req.flash('alertStatus', 'danger');
-    res.redirect('/anggota');
+    res.redirect('/users');
   }
 };
 
 const editUser = async (req, res) => {
   try {
-    const { id, nama, alamat, whatsapp, email, jabatan, foto } = req.body;
-    const target = await Anggota.findOne({ _id: id });
+    const { id, username, email, role, password, isActive } = req.body;
+    const target = await Users.findOne({ _id: id });
+    const update = { username, email, role, password, isActive };
+    const result = await Users.updateOne(target, update);
 
-    // jika ada foto, artinya foto masihh menggunakan foto lama
-    if(foto) {
-      const update = { nama, alamat, kontak: {whatsapp, email}, jabatan, foto };
-      await Anggota.findOneAndUpdate(target._id, update);
-      req.flash('alertMsg', 'Berhasil mengupdate data anggota');
+    if(result.modifiedCount == 1) {
+      req.flash('alertMsg', 'Berhasil mengupdate user');
       req.flash('alertStatus', 'primary');
-      res.redirect('/anggota');
+      res.redirect('/users');
     } else {
-      // hapus foto lama dan ganti dengan foto baru
-      fs.unlink('./public/images/uploads/' + target.foto, async (err) => {
-        if(err) {
-          req.flash('alertMsg', `Gagal mengupdate file ! [ Kode kesalahan : ${err} ]`);
-          req.flash('alertStatus', 'danger');
-          res.redirect('/anggota');
-        } else {
-          const update = { nama, alamat, kontak: {whatsapp, email}, jabatan, foto: req.file.filename };
-          await Anggota.findOneAndUpdate(target._id, update);
-          req.flash('alertMsg', 'Berhasil mengupdate data dan file anggota');
-          req.flash('alertStatus', 'primary');
-          res.redirect('/anggota');
-        }
-      });
+      req.flash('alertMsg', 'Gagal mengupdate user');
+      req.flash('alertStatus', 'warning');
+      res.redirect('/users');
     }
   } catch(err) {
     req.flash('alertMsg', `${err.message}`);
     req.flash('alertStatus', 'danger');
-    res.redirect('/anggota');
+    res.redirect('/users');
   }
 };
 
 const deleteUser = async (req, res) => {
   try {
     const { id } = req.body;
-    const target = await Anggota.findOne({ _id: id });
-
-    fs.unlink('./public/images/uploads/' + target.foto, async (err) => {
-      if(err) {
-        req.flash('alertMsg', `Gagal menghapus file ! [ Kode kesalahan : ${err} ]`);
-        req.flash('alertStatus', 'danger');
-        res.redirect('/anggota');
-      } else {
-        await Anggota.deleteOne(target);
-        req.flash('alertMsg', 'Berhasil menghapus data dan file anggota');
-        req.flash('alertStatus', 'success');
-        res.redirect('/anggota');
-      }
-    });
+    const target = await Users.findOne({ _id: id });
+    const result = await Users.deleteOne(target);
+    
+    if(result.deletedCount == 1) {
+      req.flash('alertMsg', 'Berhasil menghapus user');
+      req.flash('alertStatus', 'primary');
+      res.redirect('/users');
+    } else {
+      req.flash('alertMsg', 'Gagal menghapus user');
+      req.flash('alertStatus', 'warning');
+      res.redirect('/users');
+    }
   } catch(err) {
     req.flash('alertMsg', `${err.message}`);
     req.flash('alertStatus', 'danger');

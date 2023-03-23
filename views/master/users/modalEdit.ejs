@@ -1,0 +1,38 @@
+<!-- Modal Edit -->
+<div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="modalLabel">Edit User</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/users?_method=PUT" method="POST">
+            <input type="hidden" id="idEdit" name="id">
+
+            <label for="isActive" class="form-label">Is Active</label>
+            <select name="isActive" id="isActiveEdit" class="form-select mb-3">
+              <option value="true">Aktif</option>
+              <option value="false">Non Aktif</option>
+            </select>
+
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control mb-3" id="usernameEdit" name="username" required>
+
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control mb-3" id="emailEdit" name="email" required>
+
+            <label for="role" class="form-label">Role</label>
+            <input type="text" class="form-control mb-3" id="roleEdit" name="role" required>
+
+            <label for="password" class="form-label" id="labelPasswordEdit">Password</label>
+            <input type="password" class="form-control mb-3" id="passwordEdit" name="password" required>
+        </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" id="btnUpdate">Update</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+      </form>
+      </div>
+  </div>
+</div>

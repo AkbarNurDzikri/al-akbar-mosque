@@ -1,0 +1,53 @@
+<%- include('../../dashboardLayouts/header') %>
+<div class="card">
+  <div class="card-header text-white">
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalForm" id="modalTrigger"><i class="bi bi-person-plus"></i> Baru</button>
+  </div>
+  <div class="card-body table-responsive text-center mt-3">
+    <table class="table table-striped caption-top" id="myTable">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Nama</th>
+          <th>Alamat</th>
+          <th>Kontak</th>
+          <th>Jabatan</th>
+          <th>Foto</th>
+          <th>Opsi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- uncomment this if not use datatables -->
+        <!-- <% if (anggota.length < 1) { %>
+          <tr>
+            <td colspan="7">
+              <div class="alert alert-warning alert-dismissible fade show" role="alert">No Data</div>
+            </td>
+          </tr>
+        <% } %> -->
+
+        <% let i = 1; %>
+        <% anggota.forEach(agt => { %>
+          <tr>
+            <td><%= i++ %></td>
+            <td><%= agt.nama %></td>
+            <td><%= agt.alamat %></td>
+            <td>[ Whatsapp: <%= agt.kontak.whatsapp %> ], [ Email: <%= agt.kontak.email %> ]</td>
+            <td><%= agt.jabatan %></td>
+            <td>
+              <img src="/images/uploads/<%= agt.foto %>" class="w-25" alt="foto-anggota">
+            </td>
+            <td>
+              <a href="#" class="badge rounded-pill text-bg-success btnEdit mb-1" data-bs-toggle="modal" data-bs-target="#modalForm" data-id="<%= agt.id %>" data-nama="<%= agt.nama %>" data-alamat="<%= agt.alamat %>" data-whatsapp="<%= agt.kontak.whatsapp %>" data-email="<%= agt.kontak.email %>" data-jabatan="<%= agt.jabatan %>" data-foto="<%= agt.foto %>"><i class="bi bi-pencil-square"></i></a>
+              <a href="#" class="badge rounded-pill text-bg-danger btnHapus" data-bs-toggle="modal" data-bs-target="#modalKonfirmDelete" data-id="<%= agt.id %>" data-nama="<%= agt.nama %>"><i class="bi bi-trash3"></i></a>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<%- include('../../dashboardLayouts/footer') %>
+<%- include('modalForm') %>
+<%- include('modalKonfirmDelete') %>
+<script src="/javascripts/dkm/anggota.js"></script>

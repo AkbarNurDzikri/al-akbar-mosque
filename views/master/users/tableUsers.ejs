@@ -1,0 +1,50 @@
+<%- include('../../dashboardLayouts/header') %>
+<div class="card">
+  <div class="card-header text-white">
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAdd" id="modalTrigger"><i class="bi bi-person-plus"></i> Baru</button>
+  </div>
+  <div class="card-body table-responsive text-center mt-3">
+    <table class="table table-striped caption-top" id="myTable">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Is Active</th>
+          <th>Opsi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- uncomment this if not use datatables -->
+        <!-- <% if (users.length < 1) { %>
+          <tr>
+            <td colspan="7">
+              <div class="alert alert-warning alert-dismissible fade show" role="alert">No Data</div>
+            </td>
+          </tr>
+        <% } %> -->
+
+        <% let i = 1; %>
+        <% users.forEach(user => { %>
+          <tr>
+            <td><%= i++ %></td>
+            <td><%= user.username %></td>
+            <td><%= user.email %></td>
+            <td><%= user.role %></td>
+            <td><%= user.isActive %></td>
+            <td>
+              <a href="#" class="badge rounded-pill text-bg-success btnEdit mb-1" data-bs-toggle="modal" data-bs-target="#modalEdit" data-id="<%= user.id %>" data-username="<%= user.username %>" data-email="<%= user.email %>" data-role="<%= user.role %>" data-isActive="<%= user.isActive %>"><i class="bi bi-pencil-square"></i></a>
+              <a href="#" class="badge rounded-pill text-bg-danger btnDelete" data-bs-toggle="modal" data-bs-target="#modalDelete" data-id="<%= user.id %>" data-username="<%= user.username %>"><i class="bi bi-trash3"></i></a>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<%- include('../../dashboardLayouts/footer') %>
+<%- include('modalAdd') %>
+<%- include('modalEdit') %>
+<%- include('modalDelete') %>
+<script src="/javascripts/master/users.js"></script>
