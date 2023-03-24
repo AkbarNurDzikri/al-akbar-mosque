@@ -1,0 +1,23 @@
+<!-- Modal Edit -->
+<div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="modalLabel">Edit User</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/roles?_method=PUT" method="POST">
+            <input type="hidden" id="idEdit" name="id">
+
+            <label for="role_name" class="form-label">Nama Role</label>
+            <input type="text" class="form-control mb-3" id="role_nameEdit" name="role_name" autocomplete="off" required>
+        </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" id="btnUpdate">Update</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+      </form>
+      </div>
+  </div>
+</div>

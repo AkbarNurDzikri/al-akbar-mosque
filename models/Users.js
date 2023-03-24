@@ -4,14 +4,15 @@ const usersScheme = new mongoose.Schema({
   username: {
     type: String,
     required: true,
+    lowercase: true,
   },
   email: {
     type: String,
     required: true,
+    lowercase: true,
   },
   role: {
     type: String,
-    required: true,
   },
   password: {
     type: String,
@@ -19,6 +20,7 @@ const usersScheme = new mongoose.Schema({
   },
   isActive: {
     type: Boolean,
+    required: true,
   },
 });
 

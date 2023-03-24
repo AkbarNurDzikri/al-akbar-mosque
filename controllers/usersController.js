@@ -1,8 +1,10 @@
 const Users = require('../models/Users');
+const Roles = require('../models/Roles');
 
 const viewUsers = async (req, res) => {
   try {
     const users = await Users.find();
+    const roles = await Roles.find();
     const alertMsg = req.flash('alertMsg');
     const alertStatus = req.flash('alertStatus');
     const alert = { msg: alertMsg, status: alertStatus };
@@ -10,6 +12,7 @@ const viewUsers = async (req, res) => {
     res.render('./master/users/tableUsers', {
       users,
       alert,
+      roles,
       title: 'Master Users'
     });
   } catch(err) {
@@ -20,10 +23,18 @@ const viewUsers = async (req, res) => {
 const addUser = async (req, res) => {
   try {
     const { username, email, role, password, isActive } = req.body;
-    await Users.create({username, email, role, password, isActive});
-    req.flash('alertMsg', 'Berhasil menambahkan user');
-    req.flash('alertStatus', 'success');
-    res.redirect('/users');
+    const exist = await Users.findOne({ username: username.toLowerCase() });
+
+    if(exist) {
+      req.flash('alertMsg', 'Username ' + username.toLowerCase() + ' sudah terdaftar !');
+      req.flash('alertStatus', 'warning');
+      res.redirect('/users');
+    } else {
+      await Users.create({username, email, role, password, isActive});
+      req.flash('alertMsg', 'Berhasil menambahkan user');
+      req.flash('alertStatus', 'success');
+      res.redirect('/users');
+    }
   } catch(err) {
     req.flash('alertMsg', `${err.message}`);
     req.flash('alertStatus', 'danger');

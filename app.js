@@ -12,6 +12,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/db_alakbar');
 
 // define routes
 const indexRouter = require('./routes/index');
+const rolesRouter = require('./routes/roles');
 const usersRouter = require('./routes/users');
 const anggotaRouter = require('./routes/anggota');
 
@@ -44,6 +45,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/anggota', anggotaRouter);
+app.use('/roles', rolesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

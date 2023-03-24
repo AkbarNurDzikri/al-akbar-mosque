@@ -1,0 +1,22 @@
+<!-- Modal Add -->
+<div class="modal fade" id="modalAdd" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="modalLabel">Tambah Role</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/roles" method="POST">
+
+            <label for="role_name" class="form-label">Nama Role</label>
+            <input type="text" class="form-control mb-3" id="role_name" name="role_name" autocomplete="off" required>
+        </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" id="btnSubmit">Save</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+  </div>
+</div>

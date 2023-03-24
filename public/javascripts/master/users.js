@@ -22,9 +22,8 @@ $('#konfirmPassword').on('keyup', (e) => {
   }
 });
 
+// edit handler
 const btnEdit = $('.btnEdit');
-
-// edit form
 for(let i = 0; i < btnEdit.length; i++) {
   btnEdit[i].addEventListener('click', () => {
     $('#idEdit').val(btnEdit[i].getAttribute('data-id'));
@@ -38,6 +37,7 @@ for(let i = 0; i < btnEdit.length; i++) {
   });
 }
 
+// delete handler
 const btnDelete = $('.btnDelete');
 for(let i = 0; i < btnDelete.length; i++) {
   btnDelete[i].addEventListener('click', () => {

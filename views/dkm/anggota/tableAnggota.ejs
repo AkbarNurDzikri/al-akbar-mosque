@@ -35,7 +35,7 @@
             <td>[ Whatsapp: <%= agt.kontak.whatsapp %> ], [ Email: <%= agt.kontak.email %> ]</td>
             <td><%= agt.jabatan %></td>
             <td>
-              <img src="/images/uploads/<%= agt.foto %>" class="w-25" alt="foto-anggota">
+              <img src="/images/uploads/<%= agt.foto %>" class="w-50 img-fluid img-thumbnail" alt="foto-anggota">
             </td>
             <td>
               <a href="#" class="badge rounded-pill text-bg-success btnEdit mb-1" data-bs-toggle="modal" data-bs-target="#modalForm" data-id="<%= agt.id %>" data-nama="<%= agt.nama %>" data-alamat="<%= agt.alamat %>" data-whatsapp="<%= agt.kontak.whatsapp %>" data-email="<%= agt.kontak.email %>" data-jabatan="<%= agt.jabatan %>" data-foto="<%= agt.foto %>"><i class="bi bi-pencil-square"></i></a>

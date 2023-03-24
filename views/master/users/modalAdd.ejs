@@ -21,7 +21,11 @@
             <input type="email" class="form-control mb-3" id="email" name="email" required>
 
             <label for="role" class="form-label">Role</label>
-            <input type="text" class="form-control mb-3" id="role" name="role" required>
+            <select name="role" id="role" class="form-select mb-3" required>
+              <% roles.forEach(role => { %>
+                <option value="<%= role.role_name %>"><%= role.role_name.charAt(0).toUpperCase() + role.role_name.slice(1) %></option>
+              <% }) %>
+            </select>
 
             <label for="password" class="form-label" id="labelPassword">Password</label>
             <input type="password" class="form-control mb-3" id="password" name="password" required>
